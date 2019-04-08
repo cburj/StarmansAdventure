@@ -18,7 +18,7 @@ public class GameObject
 	{
 		if(img != null)
 		{
-			gc.drawImage(img, x, y, 30, 30);
+			gc.drawImage(img, x, y, 50, 50);	//Last 2 parameters indicated the size of the image in pixels.
 		}
 	}
 }

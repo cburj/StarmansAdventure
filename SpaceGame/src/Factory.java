@@ -14,13 +14,13 @@ public class Factory implements FactoryIF
 	@Override
 	public GameObject createProduct(String discrim, double x, double y)
 	{
-		if(discrim.contentEquals("nice"))
+		if(discrim.contentEquals("meteor"))
 		{
 			return new Meteor(gc, x, y);
 		}
-		else if(discrim.equals("saucer"))
+		else if(discrim.equals("health"))
 		{
-			return new Meteor(gc, x, y);
+			return new HealthItem(gc, x, y);
 		}
 		return null;
 	}

@@ -40,6 +40,8 @@ public class SpaceFactory extends Application
 	}
 
 	@Override
+	//The start method deals with anything that needs to be initialised at the very beginning of the game.
+	//E.g. backgrounds, canvases etc.
 	public void start(Stage stage) throws Exception
 	{
 		root = new Pane();
@@ -53,15 +55,26 @@ public class SpaceFactory extends Application
 		//Instantiating the Canvas
 		canvas = new Canvas(600,800);
 		gc = canvas.getGraphicsContext2D();
-		gc.setFill(Color.LIGHTBLUE);
+		gc.setFill(Color.rgb(46, 38, 79));
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		root.getChildren().add(canvas);
 		
 		//Instantiating the Factory
 		factory = new Factory(gc);
-		list.add(factory.createProduct("nice", 0, 0));
-		
-		
+		//list.add(factory.createProduct("nice", 0, 0));
+		int size = 10;
+		int spacing = 60;
+		for(int i = 0; i <= size; i++)
+		{
+			Random spawnRand = new Random();
+			int n = spawnRand.nextInt(2);
+			n += 1;
+			if(n%2 == 0)
+			{
+				list.add(factory.createProduct("meteor", spacing, 0));
+			}
+			spacing += 60;
+		}
 		//starting the game timer
 		timer.start();
 	}
