@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 
 public class Meteor extends GameObject
 {
-	double dx = 1;
+	double dx = 10;	//Speed at which a meteor will travel.
 	
 	public Meteor(GraphicsContext gc, double x, double y)
 	{
@@ -18,7 +18,7 @@ public class Meteor extends GameObject
 		if(x>600 || x<0)
 		{
 			dx =-dx;
-			y +=20;
+			y +=50;
 		}
 		super.update();
 	}

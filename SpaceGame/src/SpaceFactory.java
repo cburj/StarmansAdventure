@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -60,7 +59,8 @@ public class SpaceFactory extends Application
 		
 		//Instantiating the Factory
 		factory = new Factory(gc);
-		list.add(factory.createProduct("nice", 20, 20));
+		list.add(factory.createProduct("nice", 0, 0));
+		
 		
 		//starting the game timer
 		timer.start();
