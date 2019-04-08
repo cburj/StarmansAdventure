@@ -1,0 +1,15 @@
+//Each Question, Answer and Points must be placed on a single line, using a comma to distinguish between the three pieces of data.
+//E.g. Question, Answer, Points (as an integer)
+//Comments are Indicated by a double forward slash.
+//THIS FILE MUST BE STORED IN /resources FOLDER - DO NOT MOVE THIS FILE.
+//However, it is perfectly fine to add your own questions to the bottom of this file.
+
+Which country was the first to send a rocket into space?,Germany,100
+Which country was the first to send a man into space?,Russia,100
+Who was the first man to walk on the Moon?,Neil Armstrong,50
+Which Planet is closest to the Sun?,Mercury,25
+Which Planet is furthest from the Sun?,Uranus,75
+Which Planet is known as the "Red Planet"?,Mars,25
+Which metal makes mars look red in colour?,Iron,75
+How many planets are there in the Solar System?,8,50
+Which country was the first to land on The Moon?,America,25
