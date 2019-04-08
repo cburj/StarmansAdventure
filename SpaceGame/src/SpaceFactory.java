@@ -26,8 +26,14 @@ public class SpaceFactory extends Application
 
 		@Override
 		public void handle(long arg0) {
-			//Game Loop Code Goes Here.
+			gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+			for(GameObject obj : list)
+			{
+				obj.update();
+			}
 		}};
+		
+	Factory factory;
 	
 	public static void main(String[] args)
 	{
@@ -51,6 +57,13 @@ public class SpaceFactory extends Application
 		gc.setFill(Color.LIGHTBLUE);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		root.getChildren().add(canvas);
+		
+		//Instantiating the Factory
+		factory = new Factory(gc);
+		list.add(factory.createProduct("nice", 20, 20));
+		
+		//starting the game timer
+		timer.start();
 	}
 
 }
