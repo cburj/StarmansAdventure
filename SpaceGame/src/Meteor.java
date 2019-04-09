@@ -1,6 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Meteor extends GameObject
 {
@@ -16,6 +15,10 @@ public class Meteor extends GameObject
 	public void update()
 	{
 		y += dy;
+		if(y >= 750)
+		{
+			img = null;	//Removes the sprite once it reaches a certain depth on the screen, to increase performance.
+		}
 		super.update();
 	}
 

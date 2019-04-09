@@ -19,8 +19,9 @@ public class SpaceFactory extends Application
 	
 	ArrayList<GameObject> list = new ArrayList<GameObject>();
 	Random rand = new Random(System.currentTimeMillis());
-	int count = 0;
+	int count = 0;	//Used to count the number of rows of meteors.
 	Factory factory;
+	//Game Loop
 	AnimationTimer timer = new AnimationTimer() {
 
 		@Override
@@ -35,7 +36,7 @@ public class SpaceFactory extends Application
 			int size = 8;
 			int spacing = 20;
 			//Loop for creating a new row of meteors
-			if(System.currentTimeMillis()%45 == 0)
+			if(count%120 == 0)	//The 120 represents approximately 2 seconds between each new row spawning.
 			{
 				for(int i = 0; i <= size; i++)
 				{
@@ -49,6 +50,7 @@ public class SpaceFactory extends Application
 					spacing += 100;
 				}
 			}
+			count++;
 		}};
 		
 	
