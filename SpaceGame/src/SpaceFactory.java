@@ -20,7 +20,7 @@ public class SpaceFactory extends Application
 	ArrayList<GameObject> list = new ArrayList<GameObject>();
 	Random rand = new Random(System.currentTimeMillis());
 	int count = 0;
-	
+	Factory factory;
 	AnimationTimer timer = new AnimationTimer() {
 
 		@Override
@@ -30,9 +30,27 @@ public class SpaceFactory extends Application
 			{
 				obj.update();
 			}
+			factory = new Factory(gc);
+			//list.add(factory.createProduct("nice", 0, 0));
+			int size = 10;
+			int spacing = 60;
+			//Loop for creating a new row of meteors
+			for(int i = 0; i <= size; i++)
+			{
+				Random spawnRand = new Random();
+				int n = spawnRand.nextInt(2);
+				n += 1;
+				if(n%2 == 0)
+				{
+					list.add(factory.createProduct("meteor", spacing, 0));
+				}
+				spacing += 60;
+			}
+			//starting the game timer
+			timer.start();
 		}};
 		
-	Factory factory;
+	
 	
 	public static void main(String[] args)
 	{
