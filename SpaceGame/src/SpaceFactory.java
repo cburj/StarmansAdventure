@@ -32,22 +32,23 @@ public class SpaceFactory extends Application
 			}
 			factory = new Factory(gc);
 			//list.add(factory.createProduct("nice", 0, 0));
-			int size = 10;
-			int spacing = 60;
+			int size = 8;
+			int spacing = 20;
 			//Loop for creating a new row of meteors
-			for(int i = 0; i <= size; i++)
+			if(System.currentTimeMillis()%45 == 0)
 			{
-				Random spawnRand = new Random();
-				int n = spawnRand.nextInt(2);
-				n += 1;
-				if(n%2 == 0)
+				for(int i = 0; i <= size; i++)
 				{
-					list.add(factory.createProduct("meteor", spacing, 0));
+					Random spawnRand = new Random();
+					int n = spawnRand.nextInt(2);
+					n += 1;
+					if(n%2 == 0)
+					{
+						list.add(factory.createProduct("meteor", spacing, -50));
+					}
+					spacing += 100;
 				}
-				spacing += 60;
 			}
-			//starting the game timer
-			timer.start();
 		}};
 		
 	
@@ -76,24 +77,6 @@ public class SpaceFactory extends Application
 		gc.setFill(Color.rgb(46, 38, 79));
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		root.getChildren().add(canvas);
-		
-		//Instantiating the Factory
-		factory = new Factory(gc);
-		//list.add(factory.createProduct("nice", 0, 0));
-		int size = 10;
-		int spacing = 60;
-		for(int i = 0; i <= size; i++)
-		{
-			Random spawnRand = new Random();
-			int n = spawnRand.nextInt(2);
-			n += 1;
-			if(n%2 == 0)
-			{
-				list.add(factory.createProduct("meteor", spacing, 0));
-			}
-			spacing += 60;
-		}
-		//starting the game timer
 		timer.start();
 	}
 
