@@ -1,3 +1,4 @@
+//Imports
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.animation.AnimationTimer;
@@ -86,6 +87,8 @@ public class SpaceFactory extends Application
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		root.getChildren().add(canvas);
 		timer.start();
+		
+		//Background Music
 	}
 
 }
