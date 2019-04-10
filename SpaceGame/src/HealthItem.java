@@ -8,7 +8,7 @@ public class HealthItem extends GameObject
 	public HealthItem(GraphicsContext gc, double x, double y)
 	{
 		super(gc, x, y);
-		img = new Image("resources/first-aid-kit.png");
+		img = new Image("resources/medkit.png");
 		update();
 	}
 	

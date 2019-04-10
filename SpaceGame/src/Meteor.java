@@ -8,7 +8,7 @@ public class Meteor extends GameObject
 	public Meteor(GraphicsContext gc, double x, double y)
 	{
 		super(gc, x, y);
-		img = new Image("resources/meteorFull.png");
+		img = new Image("resources/Meteor.png");
 		update();
 	}
 	
