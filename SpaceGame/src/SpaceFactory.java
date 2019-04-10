@@ -43,9 +43,15 @@ public class SpaceFactory extends Application
 					Random spawnRand = new Random();
 					int n = spawnRand.nextInt(2);
 					n += 1;
+					//There is a 50/50 chance of a meteor spawning in each column.
 					if(n%2 == 0)
 					{
 						list.add(factory.createProduct("meteor", spacing, -50));
+					}
+					//If no meteor has spawned, and the count is divisible by 7 then spawn medkits in any empty columns.
+					if(count % 7 ==0 && n%2 !=0)
+					{
+						list.add(factory.createProduct("health", spacing, -50));
 					}
 					spacing += 100;
 				}
