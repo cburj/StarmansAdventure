@@ -3,9 +3,12 @@ import java.util.ArrayList;
 import java.util.Random;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -17,7 +20,35 @@ public class SpaceFactory extends Application
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
+	Player p1;
+	MoveRightStrat mr = new MoveRightStrat();
+	MoveLeftStrat ml = new MoveLeftStrat();
 	
+	//Controls for the Player:
+	EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>()
+			{
+
+				@Override
+				public void handle(KeyEvent event)
+				{
+					if(event.getCode() == KeyCode.D)
+					{
+						gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+						p1.set_strategy(mr);
+						p1.execute();
+						//System.out.println("turning right");
+					}
+					else if(event.getCode() == KeyCode.A)
+					{
+						gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+						p1.set_strategy(ml);
+						p1.execute();
+						//System.out.println("turning left");
+					}
+				}
+		
+			};
+			
 	ArrayList<GameObject> list = new ArrayList<GameObject>();
 	Random rand = new Random(System.currentTimeMillis());
 	int count = 0;	//Used to count the number of rows of meteors.
@@ -33,7 +64,6 @@ public class SpaceFactory extends Application
 				obj.update();
 			}
 			factory = new Factory(gc);
-			//list.add(factory.createProduct("nice", 0, 0));
 			int size = 8;
 			int spacing = 20;
 			//Loop for creating a new row of meteors
@@ -59,8 +89,6 @@ public class SpaceFactory extends Application
 			}
 			count++;
 		}};
-		
-	
 	
 	public static void main(String[] args)
 	{
@@ -86,9 +114,15 @@ public class SpaceFactory extends Application
 		gc.setFill(Color.rgb(46, 38, 79));
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		root.getChildren().add(canvas);
-		timer.start();
 		
-		//Background Music
+		//Adding the player to the scene.
+		p1 = new Player(150,500,gc);
+		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		p1.set_strategy(mr);
+		p1.execute();
+		scene.setOnKeyPressed(keyboardHandler);
+		
+		timer.start();
 	}
 
 }
