@@ -37,7 +37,7 @@ public class SpaceFactory extends Application
 			int size = 8;
 			int spacing = 20;
 			//Loop for creating a new row of meteors
-			if(count%120 == 0)	//The 120 represents approximately 2 seconds between each new row spawning.
+			if(count%60 == 0)	//The 60 represents approximately 1 seconds between each new row spawning.
 			{
 				for(int i = 0; i <= size; i++)
 				{

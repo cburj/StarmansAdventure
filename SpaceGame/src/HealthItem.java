@@ -3,7 +3,7 @@ import javafx.scene.image.Image;
 
 public class HealthItem extends GameObject
 {
-	double dy = 1;	//Speed at which the meteor will travel vertically.
+	double dy = 2;	//Speed at which the meteor will travel vertically.
 	
 	public HealthItem(GraphicsContext gc, double x, double y)
 	{
