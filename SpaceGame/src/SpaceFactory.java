@@ -36,14 +36,14 @@ public class SpaceFactory extends Application
 						gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 						p1.set_strategy(mr);
 						p1.execute();
-						//System.out.println("turning right");
+						System.out.println("turning right");
 					}
 					else if(event.getCode() == KeyCode.A)
 					{
 						gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 						p1.set_strategy(ml);
 						p1.execute();
-						//System.out.println("turning left");
+						System.out.println("turning left");
 					}
 				}
 		
@@ -53,6 +53,8 @@ public class SpaceFactory extends Application
 	Random rand = new Random(System.currentTimeMillis());
 	int count = 0;	//Used to count the number of rows of meteors
 	Factory factory;
+	//Loading the Question Master
+	QuestionMaster qMast = new QuestionMaster();
 	//Game Loop
 	AnimationTimer timer = new AnimationTimer() {
 
@@ -69,6 +71,7 @@ public class SpaceFactory extends Application
 			//Loop for creating a new row of meteors
 			if(count%60 == 0)	//The 60 represents approximately 1 seconds between each new row spawning.
 			{
+				boolean qAsked = false;	//Boolean to indicate if a question has been asked in this current run through of spawning items.
 				for(int i = 0; i <= size; i++)
 				{
 					Random spawnRand = new Random();
@@ -83,6 +86,11 @@ public class SpaceFactory extends Application
 					if(count % 7 ==0 && n%2 !=0)
 					{
 						list.add(factory.createProduct("health", spacing, -50));
+						if(qAsked == false)	//If a question hasn't been asked when a healh item spawns, a random Q is selected.
+						{
+							qMast.randomQuestion();
+							qAsked = true;	//the value of qAsked is set to true to prevent multiple questions being asked at once.
+						}
 					}
 					spacing += 100;
 				}
@@ -121,6 +129,9 @@ public class SpaceFactory extends Application
 		p1.set_strategy(mr);
 		p1.execute();
 		scene.setOnKeyPressed(keyboardHandler);
+		//Importing the Question File.
+		qMast.importFile();
+		
 		
 		timer.start();
 	}

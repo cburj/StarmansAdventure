@@ -19,13 +19,20 @@ public class QuestionMaster
 		
 	}
 	
-	//Method for selecting a file that contains the Questions
+	//Method for AUTOMATICALLY importing a file containing the questions.
+	public void importFile() throws FileNotFoundException
+	{
+		String myFile = "src/resources/questions.txt";
+		importQuestions(myFile);
+	}
+	
+	//Method for MANUALLY selecting a file that contains the Questions
 	public void selectFile() throws FileNotFoundException
     {
         Frame myFrame = null;
         FileDialog fileBox = new FileDialog(myFrame, "Open", FileDialog.LOAD);
         fileBox.setVisible(true);
-        String myFile = "../resources/" +fileBox.getFile();
+        String myFile = "/resources/" + fileBox.getFile();
         importQuestions(myFile);
     }
 	
