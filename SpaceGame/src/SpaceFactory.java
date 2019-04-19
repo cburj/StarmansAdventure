@@ -51,7 +51,7 @@ public class SpaceFactory extends Application
 			
 	ArrayList<GameObject> list = new ArrayList<GameObject>();
 	Random rand = new Random(System.currentTimeMillis());
-	int count = 0;	//Used to count the number of rows of meteors.
+	int count = 0;	//Used to count the number of rows of meteors
 	Factory factory;
 	//Game Loop
 	AnimationTimer timer = new AnimationTimer() {
