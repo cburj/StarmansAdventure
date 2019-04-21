@@ -11,9 +11,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 public class SpaceFactory extends Application
 {
 	Pane root;
@@ -21,6 +24,7 @@ public class SpaceFactory extends Application
 	Canvas canvas;
 	GraphicsContext gc;
 	Player p1;
+	Text text = new Text();
 	MoveRightStrat mr = new MoveRightStrat();
 	MoveLeftStrat ml = new MoveLeftStrat();
 	
@@ -132,8 +136,18 @@ public class SpaceFactory extends Application
 		//Importing the Question File.
 		qMast.importFile();
 		
-		
+		//Starting the Animation Timer
 		timer.start();
+		
+		//Text Tests
+		String stext = "Welcome to Starman's Space Adventure!";
+		text.setText(stext);
+		text.setX(75);
+		text.setY(350);
+		text.setFont(Font.font("Arial", FontWeight.THIN, FontPosture.REGULAR, 20));
+		text.setFill(Color.RED);
+		text.setTextAlignment(TextAlignment.CENTER);
+		root.getChildren().add(text);
 	}
 
 }
