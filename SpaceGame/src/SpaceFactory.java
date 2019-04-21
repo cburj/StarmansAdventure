@@ -109,11 +109,11 @@ public class SpaceFactory extends Application
 	public void start(Stage stage) throws Exception
 	{
 		root = new Pane();
-		scene = new Scene(root, 600, 800);
-		//stage.setResizable(false);	//Prevents the user from resizing the game window.
-		stage.initStyle(StageStyle.UNDECORATED);	//Removes any window decorations.
+		scene = new Scene(root, 500, 750);
+		stage.setResizable(false);	//Prevents the user from resizing the game window.
+		//stage.initStyle(StageStyle.UNDECORATED);	//Removes any window decorations.
 		stage.setScene(scene);
-		stage.setTitle("SpaceGame");
+		stage.setTitle("Starman's Space Adventure");
 		stage.show();
 		
 		//Instantiating the Canvas
