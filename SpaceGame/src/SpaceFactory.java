@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -25,6 +27,7 @@ public class SpaceFactory extends Application
 	GraphicsContext gc;
 	Player p1;
 	Text text = new Text();
+	Text points = new Text();
 	MoveRightStrat mr = new MoveRightStrat();
 	MoveLeftStrat ml = new MoveLeftStrat();
 	
@@ -114,6 +117,7 @@ public class SpaceFactory extends Application
 	public void start(Stage stage) throws Exception
 	{
 		root = new Pane();
+		//Setting the scene.
 		scene = new Scene(root, 500, 750);
 		stage.setResizable(false);	//Prevents the user from resizing the game window.
 		//stage.initStyle(StageStyle.UNDECORATED);	//Removes any window decorations.
@@ -125,7 +129,7 @@ public class SpaceFactory extends Application
 		canvas = new Canvas(600,800);
 		gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.rgb(46, 38, 79));
-		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		//gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		root.getChildren().add(canvas);
 		
 		//Adding the player to the scene.
@@ -134,6 +138,7 @@ public class SpaceFactory extends Application
 		p1.set_strategy(mr);
 		p1.execute();
 		scene.setOnKeyPressed(keyboardHandler);
+		
 		//Importing the Question File.
 		qMast.importFile();
 		
@@ -141,16 +146,28 @@ public class SpaceFactory extends Application
 		timer.start();
 		
 		//Initialising the Question
-		String stext = "Welcome to Starman's Space Adventure!";
+		String stext = "Welcome to Starman's Space Adventure!";	//This is never seen by the user - unless there is a problem reading the questions from the file.
 		text.setText(stext);
 		text.setX(75);
-		text.setY(350);
+		text.setY(75);
 		text.setFont(Font.font("Press Start 2P", FontWeight.THIN, FontPosture.REGULAR, 10));
 		text.setWrappingWidth(370);
 		text.setStyle("-fx-line-spacing: 1em;");
 		text.setFill(Color.WHITE);
 		text.setTextAlignment(TextAlignment.CENTER);
 		root.getChildren().add(text);
+		
+		//Initialising the User Points HUD Element.
+		String pointText = "0 Points";
+		points.setText(pointText);
+		points.setX(-100);
+		points.setY(750);
+		points.setFont(Font.font("Press Start 2P", FontWeight.THIN, FontPosture.REGULAR, 15));
+		points.setWrappingWidth(370);
+		points.setStyle("-fx-line-spacing: 1em;");
+		points.setFill(Color.WHITE);
+		points.setTextAlignment(TextAlignment.CENTER);
+		root.getChildren().add(points);
 	}
 
 }

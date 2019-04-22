@@ -109,4 +109,9 @@ public class QuestionMaster
 		Question randomQ = questionList.get(pos);
 		return randomQ.getQuestion() + " (" + randomQ.getPoints() + " Points)";
 	}
+	
+	public int returnPoints()
+	{
+		return 15;
+	}
 }
