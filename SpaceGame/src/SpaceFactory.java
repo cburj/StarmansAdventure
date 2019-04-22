@@ -7,8 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -19,6 +18,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
+
 public class SpaceFactory extends Application
 {
 	Pane root;
@@ -28,6 +29,7 @@ public class SpaceFactory extends Application
 	Player p1;
 	Text text = new Text();
 	Text points = new Text();
+	DropShadow ds = new DropShadow();
 	MoveRightStrat mr = new MoveRightStrat();
 	MoveLeftStrat ml = new MoveLeftStrat();
 	
@@ -145,8 +147,13 @@ public class SpaceFactory extends Application
 		//Starting the Animation Timer
 		timer.start();
 		
+		//Drop Shadow Settings
+		ds.setOffsetY(3.0f);
+		ds.setColor(Color.WHITE);
+		
 		//Initialising the Question
 		String stext = "Welcome to Starman's Space Adventure!";	//This is never seen by the user - unless there is a problem reading the questions from the file.
+		text.setEffect(ds);
 		text.setText(stext);
 		text.setX(75);
 		text.setY(75);
@@ -159,6 +166,7 @@ public class SpaceFactory extends Application
 		
 		//Initialising the User Points HUD Element.
 		String pointText = "0 Points";
+		points.setEffect(ds);
 		points.setText(pointText);
 		points.setX(-100);
 		points.setY(750);
