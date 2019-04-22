@@ -90,9 +90,10 @@ public class SpaceFactory extends Application
 					if(count % 7 ==0 && n%2 !=0)
 					{
 						list.add(factory.createProduct("health", spacing, -50));
-						if(qAsked == false)	//If a question hasn't been asked when a healh item spawns, a random Q is selected.
+						if(qAsked == false)	//If a question hasn't been asked when a health item spawns, a random Q is selected.
 						{
-							qMast.randomQuestion();
+							//qMast.randomQuestion();	//Prints a question to the console (OLD)
+							text.setText(qMast.returnQuestion());	//Changes the question on screen to a new random one.
 							qAsked = true;	//the value of qAsked is set to true to prevent multiple questions being asked at once.
 						}
 					}
@@ -139,13 +140,15 @@ public class SpaceFactory extends Application
 		//Starting the Animation Timer
 		timer.start();
 		
-		//Text Tests
+		//Initialising the Question
 		String stext = "Welcome to Starman's Space Adventure!";
 		text.setText(stext);
 		text.setX(75);
 		text.setY(350);
-		text.setFont(Font.font("Arial", FontWeight.THIN, FontPosture.REGULAR, 20));
-		text.setFill(Color.RED);
+		text.setFont(Font.font("Press Start 2P", FontWeight.THIN, FontPosture.REGULAR, 10));
+		text.setWrappingWidth(370);
+		text.setStyle("-fx-line-spacing: 1em;");
+		text.setFill(Color.WHITE);
 		text.setTextAlignment(TextAlignment.CENTER);
 		root.getChildren().add(text);
 	}

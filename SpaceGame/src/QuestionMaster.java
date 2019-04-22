@@ -101,4 +101,12 @@ public class QuestionMaster
 		Question randomQ = questionList.get(pos);
 		System.out.println(randomQ.getQuestion());
 	}
+	
+	//Method to return the string value of a randomly selected question from the file.
+	public String returnQuestion()
+	{
+		int pos = rand.nextInt(questionList.size());
+		Question randomQ = questionList.get(pos);
+		return randomQ.getQuestion() + " (" + randomQ.getPoints() + " Points)";
+	}
 }
