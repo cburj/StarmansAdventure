@@ -32,7 +32,7 @@ public class QuestionMaster
         Frame myFrame = null;
         FileDialog fileBox = new FileDialog(myFrame, "Open", FileDialog.LOAD);
         fileBox.setVisible(true);
-        String myFile = "/resources/" + fileBox.getFile();
+        String myFile = "./src/resources/" + fileBox.getFile();
         importQuestions(myFile);
     }
 	

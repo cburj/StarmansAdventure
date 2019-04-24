@@ -27,11 +27,20 @@ public class SpaceFactory extends Application
 	Canvas canvas;
 	GraphicsContext gc;
 	Player p1;
+	
+	//Text and Text Effects:
 	Text text = new Text();
 	Text points = new Text();
+	Text framesPerSec = new Text();
 	DropShadow ds = new DropShadow();
+	
+	//Fields for Movement Strategies:
 	MoveRightStrat mr = new MoveRightStrat();
 	MoveLeftStrat ml = new MoveLeftStrat();
+	
+	//Fields for FPS Counter:
+	int frames = 0;
+	double prevMillis = 0;
 	
 	//Controls for the Player:
 	EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>()
@@ -106,6 +115,11 @@ public class SpaceFactory extends Application
 				}
 			}
 			count++;
+			//FPS Counter Stuff - Needs Tidying up a bit.
+			frames++;
+			double fps = getFPS();
+			int fpsINT = (int) fps;
+			framesPerSec.setText("FPS: " + fpsINT);
 		}};
 	
 	public static void main(String[] args)
@@ -176,6 +190,28 @@ public class SpaceFactory extends Application
 		points.setFill(Color.WHITE);
 		points.setTextAlignment(TextAlignment.CENTER);
 		root.getChildren().add(points);
+		
+		//Initialising the FPS Counter HUD Element:
+		String fpsText = "FPS: ";
+		framesPerSec.setEffect(ds);
+		framesPerSec.setText(fpsText);
+		framesPerSec.setX(-130);
+		framesPerSec.setY(30);
+		framesPerSec.setFont(Font.font("Press Start 2P", FontWeight.THIN, FontPosture.REGULAR, 15));
+		framesPerSec.setWrappingWidth(370);
+		framesPerSec.setStyle("-fx-line-spacing: 1em;");
+		framesPerSec.setFill(Color.YELLOW);
+		framesPerSec.setTextAlignment(TextAlignment.CENTER);
+		root.getChildren().add(framesPerSec);
+	}
+	
+	//Method for calculating the FPS - for debugging and optimization purposes.
+	public double getFPS()
+	{
+		double deltaTime = System.currentTimeMillis() - prevMillis;
+		double fps = 1/(deltaTime)*1000;	//as the time is recieved in milliseconds, the FPS has to be multiplied by 1000 - otherwise it would be in frames per millisecond
+		prevMillis = System.currentTimeMillis();
+		return fps;
 	}
 
 }
