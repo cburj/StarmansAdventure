@@ -163,17 +163,21 @@ public class SpaceFactory extends Application
 		
 		//Drop Shadow Settings
 		ds.setOffsetY(3.0f);
-		ds.setColor(Color.WHITE);
+		ds.setColor(Color.BLACK);
+		
+		//Loading Custom Font:
+		Font.loadFont(SpaceFactory.class.getResource("/resources/upheavtt.ttf").toExternalForm(),10);
 		
 		//Initialising the Question
 		String stext = "Welcome to Starman's Space Adventure!";	//This is never seen by the user - unless there is a problem reading the questions from the file.
+		text.getStyleClass().add("question");	//setting the class name
 		text.setEffect(ds);
 		text.setText(stext);
 		text.setX(75);
 		text.setY(75);
-		text.setFont(Font.font("Press Start 2P", FontWeight.THIN, FontPosture.REGULAR, 10));
+		text.setFont(Font.font("Upheaval TT (BRK)", FontWeight.THIN, FontPosture.REGULAR, 20));
 		text.setWrappingWidth(370);
-		text.setStyle("-fx-line-spacing: 1em;");
+		text.setStyle("-fx-line-spacing: 0.5em;");
 		text.setFill(Color.WHITE);
 		text.setTextAlignment(TextAlignment.CENTER);
 		root.getChildren().add(text);
@@ -182,12 +186,12 @@ public class SpaceFactory extends Application
 		String pointText = "0 Points";
 		points.setEffect(ds);
 		points.setText(pointText);
-		points.setX(-100);
+		points.setX(-125);
 		points.setY(750);
-		points.setFont(Font.font("Press Start 2P", FontWeight.THIN, FontPosture.REGULAR, 15));
+		points.setFont(Font.font("Upheaval TT (BRK)", FontWeight.THIN, FontPosture.REGULAR, 20));
 		points.setWrappingWidth(370);
 		points.setStyle("-fx-line-spacing: 1em;");
-		points.setFill(Color.WHITE);
+		points.setFill(Color.CYAN);
 		points.setTextAlignment(TextAlignment.CENTER);
 		root.getChildren().add(points);
 		
@@ -195,17 +199,18 @@ public class SpaceFactory extends Application
 		String fpsText = "FPS: ";
 		framesPerSec.setEffect(ds);
 		framesPerSec.setText(fpsText);
-		framesPerSec.setX(-130);
-		framesPerSec.setY(30);
-		framesPerSec.setFont(Font.font("Press Start 2P", FontWeight.THIN, FontPosture.REGULAR, 15));
+		framesPerSec.setX(-140);
+		framesPerSec.setY(25);
+		framesPerSec.setFont(Font.font("Upheaval TT (BRK)", FontWeight.THIN, FontPosture.REGULAR, 20));
 		framesPerSec.setWrappingWidth(370);
 		framesPerSec.setStyle("-fx-line-spacing: 1em;");
 		framesPerSec.setFill(Color.YELLOW);
 		framesPerSec.setTextAlignment(TextAlignment.CENTER);
 		root.getChildren().add(framesPerSec);
+		
 	}
 	
-	//Method for calculating the FPS - for debugging and optimization purposes.
+	//Method for calculating the FPS - for debugging and optimisation purposes.
 	public double getFPS()
 	{
 		double deltaTime = System.currentTimeMillis() - prevMillis;
