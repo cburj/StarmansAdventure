@@ -12,6 +12,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -242,6 +243,12 @@ public class SpaceFactory extends Application
 		root.getChildren().add(answerBox);
 		root.requestFocus();
 		
+		//Background Music:
+		int repeat = 50;	//Number of times the audio will be repeated, in this case 50x which will be much longer than anyone would play the game for.
+        AudioClip audio = new AudioClip(getClass().getResource("/resources/audio.mp3").toExternalForm());
+        audio.setVolume(0.5f);
+        audio.setCycleCount(repeat);
+        audio.play();
 		
 	}
 	
@@ -249,7 +256,7 @@ public class SpaceFactory extends Application
 	public double getFPS()
 	{
 		double deltaTime = System.currentTimeMillis() - prevMillis;
-		double fps = 1/(deltaTime)*1000;	//as the time is recieved in milliseconds, the FPS has to be multiplied by 1000 - otherwise it would be in frames per millisecond
+		double fps = 1/(deltaTime)*1000;	//as the time is received in milliseconds, the FPS has to be multiplied by 1000 - otherwise it would be in frames per millisecond
 		prevMillis = System.currentTimeMillis();
 		return fps;
 	}
