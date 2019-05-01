@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -32,7 +33,10 @@ public class SpaceFactory extends Application
 	Text text = new Text();
 	Text points = new Text();
 	Text framesPerSec = new Text();
+	Text health = new Text();
 	DropShadow ds = new DropShadow();
+	TextField answerBox;
+	int startHealth = 100; //Health that the user starts off with.
 	
 	//Fields for Movement Strategies:
 	MoveRightStrat mr = new MoveRightStrat();
@@ -63,6 +67,11 @@ public class SpaceFactory extends Application
 						p1.execute();
 						System.out.println("turning left");
 					}
+					//When the user presses the enter key, their answer needs to be checked, and focus is given back to the player.
+					else if(event.getCode() == KeyCode.ENTER)
+					{
+						root.requestFocus();
+					}
 				}
 		
 			};
@@ -78,7 +87,7 @@ public class SpaceFactory extends Application
 
 		@Override
 		public void handle(long arg0) {
-			gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+			//gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 			for(GameObject obj : list)
 			{
 				obj.update();
@@ -135,6 +144,7 @@ public class SpaceFactory extends Application
 		root = new Pane();
 		//Setting the scene.
 		scene = new Scene(root, 500, 750);
+		scene.getStylesheets().add("/resources/style.css");
 		stage.setResizable(false);	//Prevents the user from resizing the game window.
 		//stage.initStyle(StageStyle.UNDECORATED);	//Removes any window decorations.
 		stage.setScene(scene);
@@ -187,7 +197,7 @@ public class SpaceFactory extends Application
 		points.setEffect(ds);
 		points.setText(pointText);
 		points.setX(-125);
-		points.setY(750);
+		points.setY(745);
 		points.setFont(Font.font("Upheaval TT (BRK)", FontWeight.THIN, FontPosture.REGULAR, 20));
 		points.setWrappingWidth(370);
 		points.setStyle("-fx-line-spacing: 1em;");
@@ -207,6 +217,31 @@ public class SpaceFactory extends Application
 		framesPerSec.setFill(Color.YELLOW);
 		framesPerSec.setTextAlignment(TextAlignment.CENTER);
 		root.getChildren().add(framesPerSec);
+		
+		//Initialising the Health Points HUD Element:
+		String healthText = "HEALTH: " + startHealth;
+		health.setEffect(ds);
+		health.setText(healthText);
+		health.setX(255);
+		health.setY(745);
+		health.setFont(Font.font("Upheaval TT (BRK)", FontWeight.THIN, FontPosture.REGULAR, 20));
+		health.setWrappingWidth(370);
+		health.setStyle("-fx-line-spacing: 1em;");
+		health.setFill(Color.rgb(255, 0, 195));
+		health.setTextAlignment(TextAlignment.CENTER);
+		root.getChildren().add(health);
+		
+		//Initialising the Question Answer Box:
+		answerBox = new TextField();
+		answerBox.setPromptText("Answer Here");
+		answerBox.setLayoutX(125);
+		answerBox.setLayoutY(720);
+		answerBox.setPrefWidth(250);
+		answerBox.setFont(Font.font("Upheaval TT (BRK)", FontWeight.THIN, FontPosture.REGULAR, 20));
+		answerBox.getStyleClass().add("answerBox");	//adds a class name to allow CSS Styling.
+		root.getChildren().add(answerBox);
+		root.requestFocus();
+		
 		
 	}
 	
