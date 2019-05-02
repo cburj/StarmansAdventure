@@ -1,7 +1,7 @@
 import java.awt.FileDialog;
 import java.awt.Frame;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -42,11 +42,12 @@ public class QuestionMaster
 		String inputFile = fileName;
         if(inputFile != null)
         {
-            File dataFile = new File(inputFile);
+            //File dataFile = new File(inputFile);
+        	InputStream is = getClass().getResourceAsStream("/resources/questions.txt");
             Scanner scanner = null;
             try
             {
-                scanner = new Scanner(dataFile);
+                scanner = new Scanner(is);
             }
             catch(Exception ex)
             {

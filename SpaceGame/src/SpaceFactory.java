@@ -118,6 +118,11 @@ public class SpaceFactory extends Application
 						{
 							//qMast.randomQuestion();	//Prints a question to the console (OLD)
 							text.setText(qMast.returnQuestion());	//Changes the question on screen to a new random one.
+							
+							//Sound Effect to Tell the User a New Question has been Asked.
+							AudioClip audio = new AudioClip(getClass().getResource("/resources/question.wav").toExternalForm());
+					        audio.setVolume(0.5f);
+					        audio.play();
 							qAsked = true;	//the value of qAsked is set to true to prevent multiple questions being asked at once.
 						}
 					}
@@ -156,12 +161,12 @@ public class SpaceFactory extends Application
 		canvas = new Canvas(600,800);
 		gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.rgb(46, 38, 79));
-		//gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		root.getChildren().add(canvas);
 		
 		//Adding the player to the scene.
 		p1 = new Player(150,500,gc);
-		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		//gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		p1.set_strategy(mr);
 		p1.execute();
 		scene.setOnKeyPressed(keyboardHandler);
