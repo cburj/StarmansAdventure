@@ -28,7 +28,6 @@ public class SpaceFactory extends Application
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
-	Player p1;
 	
 	//Text and Text Effects:
 	Text text = new Text();
@@ -46,6 +45,8 @@ public class SpaceFactory extends Application
 	//Fields for FPS Counter:
 	int frames = 0;
 	double prevMillis = 0;
+	
+	Player p1;
 	
 	//Controls for the Player:
 	EventHandler<KeyEvent> keyboardHandler = new EventHandler<KeyEvent>()
@@ -88,7 +89,7 @@ public class SpaceFactory extends Application
 
 		@Override
 		public void handle(long arg0) {
-			//gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+			gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 			for(GameObject obj : list)
 			{
 				obj.update();
@@ -168,14 +169,11 @@ public class SpaceFactory extends Application
 		p1 = new Player(150,500,gc);
 		//gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		p1.set_strategy(mr);
-		p1.execute();
+		p1.execute();;
 		scene.setOnKeyPressed(keyboardHandler);
 		
 		//Importing the Question File.
 		qMast.importFile();
-		
-		//Starting the Animation Timer
-		timer.start();
 		
 		//Drop Shadow Settings
 		ds.setOffsetY(3.0f);
@@ -255,6 +253,8 @@ public class SpaceFactory extends Application
         audio.setCycleCount(repeat);
         audio.play();
 		
+        //Starting the Animation Timer
+  		timer.start();
 	}
 	
 	//Method for calculating the FPS - for debugging and optimisation purposes.
