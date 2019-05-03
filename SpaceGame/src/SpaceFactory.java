@@ -50,6 +50,9 @@ public class SpaceFactory extends Application
 	int frames = 0;
 	double prevMillis = 0;
 	
+	//PAUSE MENU FIELDS
+	boolean paused = false;
+	
 	//Background Music:
 	AudioClip backgroundMusic;
 	
@@ -79,7 +82,22 @@ public class SpaceFactory extends Application
 					//When the user presses the enter key, their answer needs to be checked, and focus is given back to the player.
 					else if(event.getCode() == KeyCode.ENTER)
 					{
+						answerBox.clear();
 						root.requestFocus();
+					}
+					//PAUSE MENU
+					else if(event.getCode() == KeyCode.ESCAPE)
+					{
+						if(paused == false)
+						{
+							timer.stop();
+							paused = true;
+						}
+						else
+						{
+							timer.start();
+							paused = false;
+						}
 					}
 				}
 		
@@ -98,7 +116,7 @@ public class SpaceFactory extends Application
 
 		@Override
 		public void handle(long arg0) {
-			gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+			//gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 			for(GameObject obj : list)
 			{
 				obj.update();
@@ -136,7 +154,7 @@ public class SpaceFactory extends Application
 							//If by the next question selection they haven't guessed correctly they lose health points
 							if(pointsAwarded != true)
 							{
-								healthValue -= 50;
+								healthValue -= 5;
 								health.setText("HEALTH: " + healthValue);
 								AudioClip audio = new AudioClip(getClass().getResource("/resources/error.wav").toExternalForm());
 						        audio.setVolume(0.5f);
@@ -162,7 +180,7 @@ public class SpaceFactory extends Application
 			int fpsINT = (int) fps;
 			framesPerSec.setText("FPS: " + fpsINT);
 			
-			//Answer Checking
+			//Checking if the answer is correct
 			if(answerBox.getText().equalsIgnoreCase(currentQ.getAnswer()) && pointsAwarded == false)
 			{
 				pointsValue += currentQ.getPoints();
@@ -171,6 +189,8 @@ public class SpaceFactory extends Application
 				AudioClip audio = new AudioClip(getClass().getResource("/resources/correct.wav").toExternalForm());
 		        audio.setVolume(0.5f);
 		        audio.play();
+		        answerBox.clear();	//clear the contents of the answer box
+				root.requestFocus();	//remove focus so the user can control the player character
 			}
 			//If the user's health is less than or equal to zero, then the game ends.
 			else if(healthValue <= 0)
