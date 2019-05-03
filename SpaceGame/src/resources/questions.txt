@@ -2,7 +2,7 @@
 //E.g. Question, Answer, Points (as an integer)
 //Comments are Indicated by a double forward slash.
 //THIS FILE MUST BE STORED IN /resources FOLDER - DO NOT MOVE THIS FILE.
-//However, it is perfectly fine to add your own questions to the bottom of this file.
+//However, it is perfectly fine to add your own questions to the bottom of this file. NO SPACES BETWEEN COMMAS
 
 Which country was the first to send a rocket into space?,Germany,100
 Which country was the first to send a man into space?,Russia,100
@@ -13,3 +13,12 @@ Which Planet is known as the "Red Planet"?,Mars,25
 Which metal makes mars look red in colour?,Iron,75
 How many planets are there in the Solar System?,8,50
 Which country was the first to land on The Moon?,America,25
+Is the sun a star or a planet?,Star,25
+What is the name of the force holding us to the Earth?,Gravity,25
+Which Galaxy is the Earth in?,Milky Way,50
+Does the sun orbit the Earth?,No,10
+What is the Second Biggest Planet in the Solar System?,Saturn,50
+Which Planet has a Giant Red Spot?,Jupiter,75
+What is the Sun Made From?,Gas,75
+Which Planet has the Largest Volcano?,Mars,75
+How Many Stars are in Our Solar System?,1,50

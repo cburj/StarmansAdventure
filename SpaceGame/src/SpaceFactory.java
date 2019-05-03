@@ -41,6 +41,7 @@ public class SpaceFactory extends Application
 	Text gameOver = new Text();
 	DropShadow ds = new DropShadow();
 	TextField answerBox;
+	Text prevAnswer = new Text();
 	
 	//Fields for Movement Strategies:
 	MoveRightStrat mr = new MoveRightStrat();
@@ -146,6 +147,13 @@ public class SpaceFactory extends Application
 						{
 							//qMast.randomQuestion();	//Prints a question to the console (OLD)
 							//text.setText(qMast.returnQuestion());	//Changes the question on screen to a new random one.
+							try {
+								prevAnswer.setText("Previous Answer: " + currentQ.getAnswer());
+							}
+							//A Clever way of setting a one time message as there is no previous 
+							catch(Exception e) {
+								prevAnswer.setText("Use A and D Keys to Move");
+							}
 							currentQ = qMast.randomQuestion();
 							text.setText(currentQ.getQuestion() +" (" + currentQ.getPoints() +" POINTS)");
 							
@@ -248,7 +256,7 @@ public class SpaceFactory extends Application
 		stage.setResizable(false);	//Prevents the user from resizing the game window.
 		//stage.initStyle(StageStyle.UNDECORATED);	//Removes any window decorations.
 		stage.setScene(scene);
-		stage.setTitle("Starman's Space Adventure");
+		stage.setTitle("Starman's Adventure - Charles Burgess");
 		stage.show();
 		
 		//Instantiating the Canvas
@@ -329,6 +337,18 @@ public class SpaceFactory extends Application
 		health.setTextAlignment(TextAlignment.CENTER);
 		root.getChildren().add(health);
 		
+		//Initialising the prevAnswer HUD Element:
+		prevAnswer.setEffect(ds);
+		prevAnswer.setText("Previous Answer: ");
+		prevAnswer.setX(55);
+		prevAnswer.setY(700);
+		prevAnswer.setFont(Font.font("Upheaval TT (BRK)", FontWeight.THIN, FontPosture.REGULAR, 20));
+		prevAnswer.setWrappingWidth(370);
+		prevAnswer.setStyle("-fx-line-spacing: 1em;");
+		prevAnswer.setFill(Color.WHITE);
+		prevAnswer.setTextAlignment(TextAlignment.CENTER);
+		root.getChildren().add(prevAnswer);
+		
 		//Initialising the Question Answer Box:
 		answerBox = new TextField();
 		answerBox.setPromptText("Answer Here");
@@ -351,7 +371,6 @@ public class SpaceFactory extends Application
 		gameOver.setStyle("-fx-line-spacing: -0.2em;");
 		gameOver.setFill(Color.RED);
 		gameOver.setTextAlignment(TextAlignment.CENTER);
-		//root.getChildren().add(gameOver);
 		
 		//Background Music:
 		int repeat = 50;	//Number of times the audio will be repeated, in this case 50x which will be much longer than anyone would play the game for.
