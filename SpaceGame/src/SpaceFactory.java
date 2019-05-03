@@ -70,14 +70,14 @@ public class SpaceFactory extends Application
 						gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 						p1.set_strategy(mr);
 						p1.execute();
-						System.out.println("turning right");
+						//System.out.println("turning right");
 					}
 					else if(event.getCode() == KeyCode.A)
 					{
 						gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 						p1.set_strategy(ml);
 						p1.execute();
-						System.out.println("turning left");
+						//System.out.println("turning left");
 					}
 					//When the user presses the enter key, their answer needs to be checked, and focus is given back to the player.
 					else if(event.getCode() == KeyCode.ENTER)
@@ -149,7 +149,7 @@ public class SpaceFactory extends Application
 							currentQ = qMast.randomQuestion();
 							text.setText(currentQ.getQuestion() +" (" + currentQ.getPoints() +" POINTS)");
 							
-							System.out.println(currentQ.getAnswer());
+							//System.out.println(currentQ.getAnswer());
 							
 							//If by the next question selection they haven't guessed correctly they lose health points
 							if(pointsAwarded != true)
@@ -201,6 +201,33 @@ public class SpaceFactory extends Application
 		        backgroundMusic.stop();
 				root.getChildren().add(gameOver);
 				timer.stop();
+			}
+			
+			//COLLISION DETECTION SYSTEM:
+			for(GameObject item: list)
+			{
+				//IF a collision is detected, determine if it's a meteor or health.
+				if(p1.getXPos()==item.getXPosition() && p1.getYPosition()==item.getYPosition())
+				{
+					//If collision is with meteor, then deduct 10 health
+					if(item instanceof Meteor)
+					{
+						healthValue -= 25;	//reduce health by 25 points
+						health.setText("HEALTH: " + healthValue);
+						AudioClip audio = new AudioClip(getClass().getResource("/resources/explosion.wav").toExternalForm());
+				        audio.setVolume(0.5f);
+				        audio.play();
+					}
+					//If collision is with health item, then give the user 25 health
+					else
+					{
+						healthValue += 25;
+						health.setText("HEALTH: " + healthValue);
+						AudioClip audio = new AudioClip(getClass().getResource("/resources/health.wav").toExternalForm());
+				        audio.setVolume(0.5f);
+				        audio.play();
+					}
+				}
 			}
 		}};
 	

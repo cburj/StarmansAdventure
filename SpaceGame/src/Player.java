@@ -45,4 +45,16 @@ public class Player extends GameObject
 	{
 		super.update();
 	}
+	
+	//Method which returns the x position of the object as a string.
+	public double getXPosition()
+	{
+		return x;
+	}
+	
+	//Method which returns the y position of the object as a string.
+		public double getYPosition()
+		{
+			return y;
+		}
 }

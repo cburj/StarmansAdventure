@@ -21,5 +21,16 @@ public class HealthItem extends GameObject
 		}
 		super.update();
 	}
+	
+	//Method which returns the position of the object as a string.
+	public double getXPosition()
+	{
+		return x-20;
+	}
+	
+	public double getYPosition()
+	{
+		return y-20;
+	}
 
 }

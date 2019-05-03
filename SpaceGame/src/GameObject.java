@@ -21,4 +21,14 @@ abstract class GameObject
 			gc.drawImage(img, x, y, 60,60);	//Last 2 parameters indicated the size of the image in pixels.
 		}
 	}
+	
+	public double getXPosition()
+	{
+		return x-20;
+	}
+	
+	public double getYPosition()
+	{
+		return y-20;
+	}
 }
