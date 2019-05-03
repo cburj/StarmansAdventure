@@ -28,6 +28,7 @@ public class HealthItem extends GameObject
 		return x-20;
 	}
 	
+	//Returns the X position of the GameObject
 	public double getYPosition()
 	{
 		return y-20;

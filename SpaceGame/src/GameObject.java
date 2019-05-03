@@ -22,11 +22,13 @@ abstract class GameObject
 		}
 	}
 	
+	//Returns the X position of the GameObject
 	public double getXPosition()
 	{
 		return x-20;
 	}
 	
+	//Returns the Y position of the GameObject
 	public double getYPosition()
 	{
 		return y-20;

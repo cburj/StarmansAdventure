@@ -31,16 +31,6 @@ public class Player extends GameObject
 		this.strategy.execute(this);
 	}
 	
-	public int getXPos()
-	{
-		return x;
-	}
-	
-	public int getYPost()
-	{
-		return y;
-	}
-	
 	public void update()
 	{
 		super.update();

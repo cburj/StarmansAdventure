@@ -207,7 +207,7 @@ public class SpaceFactory extends Application
 			for(GameObject item: list)
 			{
 				//IF a collision is detected, determine if it's a meteor or health.
-				if(p1.getXPos()==item.getXPosition() && p1.getYPosition()==item.getYPosition())
+				if(p1.getXPosition()==item.getXPosition() && p1.getYPosition()==item.getYPosition())
 				{
 					//If collision is with meteor, then deduct 10 health
 					if(item instanceof Meteor)
