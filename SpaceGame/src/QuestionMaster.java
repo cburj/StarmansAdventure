@@ -96,11 +96,11 @@ public class QuestionMaster
 
 	//Method to print out a randomly selected question from the ArrayList to the console.
 	//Doesn't currently pick a UNIQUE random Question - so repetition is likely.
-	public void randomQuestion()
+	public Question randomQuestion()
 	{
 		int pos = rand.nextInt(questionList.size());
 		Question randomQ = questionList.get(pos);
-		System.out.println(randomQ.getQuestion());
+		return randomQ;
 	}
 	
 	//Method to return the string value of a randomly selected question from the file.

@@ -29,6 +29,10 @@ public class SpaceFactory extends Application
 	Canvas canvas;
 	GraphicsContext gc;
 	
+	//Fields For Points and Health
+	int healthValue = 105;	//Set to 105 as you instantly lose 5hp
+	int pointsValue = 0;
+	
 	//Text and Text Effects:
 	Text text = new Text();
 	Text points = new Text();
@@ -36,7 +40,6 @@ public class SpaceFactory extends Application
 	Text health = new Text();
 	DropShadow ds = new DropShadow();
 	TextField answerBox;
-	int startHealth = 100; //Health that the user starts off with.
 	
 	//Fields for Movement Strategies:
 	MoveRightStrat mr = new MoveRightStrat();
@@ -84,7 +87,9 @@ public class SpaceFactory extends Application
 	Factory factory;
 	//Loading the Question Master
 	QuestionMaster qMast = new QuestionMaster();
+	Question currentQ;	//The current question being asked, allows the methods of the question to be accessed during the game.
 	//Game Loop
+	boolean pointsAwarded = false;
 	AnimationTimer timer = new AnimationTimer() {
 
 		@Override
@@ -118,7 +123,23 @@ public class SpaceFactory extends Application
 						if(qAsked == false)	//If a question hasn't been asked when a health item spawns, a random Q is selected.
 						{
 							//qMast.randomQuestion();	//Prints a question to the console (OLD)
-							text.setText(qMast.returnQuestion());	//Changes the question on screen to a new random one.
+							//text.setText(qMast.returnQuestion());	//Changes the question on screen to a new random one.
+							currentQ = qMast.randomQuestion();
+							text.setText(currentQ.getQuestion() +" (" + currentQ.getPoints() +" POINTS)");
+							
+							System.out.println(currentQ.getAnswer());
+							
+							//If by the next question selection they haven't guessed correctly they lose health points
+							if(pointsAwarded != true)
+							{
+								healthValue -= 5;
+								health.setText("HEALTH: " + healthValue);
+								AudioClip audio = new AudioClip(getClass().getResource("/resources/error.wav").toExternalForm());
+						        audio.setVolume(0.5f);
+						        audio.play();
+							}
+							
+							pointsAwarded = false;
 							
 							//Sound Effect to Tell the User a New Question has been Asked.
 							AudioClip audio = new AudioClip(getClass().getResource("/resources/question.wav").toExternalForm());
@@ -136,6 +157,14 @@ public class SpaceFactory extends Application
 			double fps = getFPS();
 			int fpsINT = (int) fps;
 			framesPerSec.setText("FPS: " + fpsINT);
+			
+			//Answer Checking
+			if(answerBox.getText().equalsIgnoreCase(currentQ.getAnswer()) && pointsAwarded == false)
+			{
+				pointsValue += currentQ.getPoints();
+				points.setText(pointsValue +" POINTS");
+				pointsAwarded = true;
+			}
 		}};
 	
 	public static void main(String[] args)
@@ -197,7 +226,8 @@ public class SpaceFactory extends Application
 		root.getChildren().add(text);
 		
 		//Initialising the User Points HUD Element.
-		String pointText = "0 Points";
+		pointsValue = 0;
+		String pointText = pointsValue + " POINTS";
 		points.setEffect(ds);
 		points.setText(pointText);
 		points.setX(-125);
@@ -223,7 +253,8 @@ public class SpaceFactory extends Application
 		root.getChildren().add(framesPerSec);
 		
 		//Initialising the Health Points HUD Element:
-		String healthText = "HEALTH: " + startHealth;
+		healthValue = 100;
+		String healthText = "HEALTH: " + healthValue;
 		health.setEffect(ds);
 		health.setText(healthText);
 		health.setX(255);

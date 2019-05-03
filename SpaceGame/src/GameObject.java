@@ -1,7 +1,7 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class GameObject
+abstract class GameObject
 {
 	protected Image img;
 	protected double x,y;
