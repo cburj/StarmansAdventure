@@ -30,7 +30,7 @@ public class SpaceFactory extends Application
 	GraphicsContext gc;
 	
 	//Fields For Points and Health
-	int healthValue = 105;	//Set to 105 as you instantly lose 5hp
+	int healthValue = 105;
 	int pointsValue = 0;
 	
 	//Text and Text Effects:
@@ -38,6 +38,7 @@ public class SpaceFactory extends Application
 	Text points = new Text();
 	Text framesPerSec = new Text();
 	Text health = new Text();
+	Text gameOver = new Text();
 	DropShadow ds = new DropShadow();
 	TextField answerBox;
 	
@@ -48,6 +49,9 @@ public class SpaceFactory extends Application
 	//Fields for FPS Counter:
 	int frames = 0;
 	double prevMillis = 0;
+	
+	//Background Music:
+	AudioClip backgroundMusic;
 	
 	Player p1;
 	
@@ -132,7 +136,7 @@ public class SpaceFactory extends Application
 							//If by the next question selection they haven't guessed correctly they lose health points
 							if(pointsAwarded != true)
 							{
-								healthValue -= 5;
+								healthValue -= 50;
 								health.setText("HEALTH: " + healthValue);
 								AudioClip audio = new AudioClip(getClass().getResource("/resources/error.wav").toExternalForm());
 						        audio.setVolume(0.5f);
@@ -164,6 +168,19 @@ public class SpaceFactory extends Application
 				pointsValue += currentQ.getPoints();
 				points.setText(pointsValue +" POINTS");
 				pointsAwarded = true;
+				AudioClip audio = new AudioClip(getClass().getResource("/resources/correct.wav").toExternalForm());
+		        audio.setVolume(0.5f);
+		        audio.play();
+			}
+			//If the user's health is less than or equal to zero, then the game ends.
+			else if(healthValue <= 0)
+			{
+				AudioClip audio = new AudioClip(getClass().getResource("/resources/gameover.wav").toExternalForm());
+		        audio.setVolume(0.5f);
+		        audio.play();
+		        backgroundMusic.stop();
+				root.getChildren().add(gameOver);
+				timer.stop();
 			}
 		}};
 	
@@ -253,7 +270,6 @@ public class SpaceFactory extends Application
 		root.getChildren().add(framesPerSec);
 		
 		//Initialising the Health Points HUD Element:
-		healthValue = 100;
 		String healthText = "HEALTH: " + healthValue;
 		health.setEffect(ds);
 		health.setText(healthText);
@@ -277,12 +293,25 @@ public class SpaceFactory extends Application
 		root.getChildren().add(answerBox);
 		root.requestFocus();
 		
+		//GAME OVER SCREEN
+		String gameOverMessage = "GAME OVER!";
+		gameOver.setEffect(ds);
+		gameOver.setText(gameOverMessage);
+		gameOver.setX(110);
+		gameOver.setY(350);
+		gameOver.setFont(Font.font("Upheaval TT (BRK)", FontWeight.THIN, FontPosture.REGULAR, 50));
+		gameOver.setWrappingWidth(0);
+		gameOver.setStyle("-fx-line-spacing: -0.2em;");
+		gameOver.setFill(Color.RED);
+		gameOver.setTextAlignment(TextAlignment.CENTER);
+		//root.getChildren().add(gameOver);
+		
 		//Background Music:
 		int repeat = 50;	//Number of times the audio will be repeated, in this case 50x which will be much longer than anyone would play the game for.
-        AudioClip audio = new AudioClip(getClass().getResource("/resources/audio.mp3").toExternalForm());
-        audio.setVolume(0.5f);
-        audio.setCycleCount(repeat);
-        audio.play();
+        backgroundMusic = new AudioClip(getClass().getResource("/resources/audio.mp3").toExternalForm());
+        backgroundMusic.setVolume(0.5f);
+        backgroundMusic.setCycleCount(repeat);
+        backgroundMusic.play();
 		
         //Starting the Animation Timer
   		timer.start();
