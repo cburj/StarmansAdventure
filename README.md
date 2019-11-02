@@ -12,7 +12,5 @@ Clone this repository and open in your favourite Java IDE. Make sure you have th
 git clone https://github.com/cburj/StarmansAdventure.git
 ```
 
-Please make sure to update tests as appropriate.
-
 ## License
 [MIT License](https://choosealicense.com/licenses/mit/)
